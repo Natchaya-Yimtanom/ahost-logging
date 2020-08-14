@@ -1,14 +1,13 @@
 <?php
 
 namespace Quinn\Logging;
-// use Illuminate\Log\Logger;
 
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Monolog\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
 
-class MySQLLoggingHandler extends AbstractProcessingHandler{
+class LoggingHandler extends AbstractProcessingHandler{
 /**
  *
  * Reference:
