@@ -27,15 +27,14 @@ class BaseLogger extends Logger{
         return $logger->pushHandler(new LoggingHandler());
     }
 
-    public function init($path)
+    public function init()
     {
-        // $this->pushHandler(new StreamHandler(storage_path($path)), Logger::INFO);
-
         //set log format and store log in file
         $dateFormat = "[Y-m-d H:i:s]";
         $output = "%datetime% %channel%.%level_name% : %message% %context% %extra%\n";
         $formatter = new LineFormatter($output,$dateFormat);
-        
+
+        $path = 'logs/custom_logs/' . date('Y-m-d') . '.log';
         $stream = new StreamHandler(storage_path($path), Logger::INFO);
         $stream->setFormatter($formatter);
         $this->pushHandler($stream);
@@ -89,9 +88,11 @@ class BaseLogger extends Logger{
         Log::channel('logging')->critical($message);
     }
 
-    public function delInfo($message, array $context = array()): void
+    public function clearLog()
     {
-        parent::info($message, $context);
+        Logging::truncate();
+        parent::info('Delete all data in table', ['user' => get_current_user()]);
+        Log::channel('logging')->info('Delete all data in table');
     }
 
 }
