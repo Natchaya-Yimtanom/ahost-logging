@@ -10,8 +10,6 @@ use Quinn\Logging\TruncateTable;
 use Quinn\Logging\PublishConfig;
 use Quinn\Logging\PublishMigrations;
 use Quinn\Logging\AddRoute;
-use Quinn\Logging\MoveControllerFile;
-
 
 class LoginServiceProvider extends ServiceProvider
 {
