@@ -13,6 +13,16 @@ use Quinn\Logging\AddRoute;
 
 class LoginServiceProvider extends ServiceProvider
 {
+    
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+    }
+
     /**
      * Register services.
      *
@@ -20,6 +30,10 @@ class LoginServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        // $configPath = __DIR__.'/../config/logging.php';
+        // $this->mergeConfigFrom($configPath, 'logging');
+
         $this->app->singleton('command.quinn-logging:kernel-command', function () {
             return new AddCommandInKernel();
         });
@@ -44,15 +58,6 @@ class LoginServiceProvider extends ServiceProvider
             return new TruncateTable();
         });
 
-    }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
         $this->commands(
             'command.quinn-logging:kernel-command',
             'command.quinn-logging:activate-all',
@@ -61,5 +66,6 @@ class LoginServiceProvider extends ServiceProvider
             'command.quinn-logging:publish-config',
             'command.quinn-logging:truncate-table',
         );
+
     }
 }
