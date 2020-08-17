@@ -3,7 +3,6 @@
 namespace Quinn\Logging;
 
 use Illuminate\Console\Command;
-use Quinn\Logging\Helpers\Publisher;
 
 class AddRoute extends Command
 {
