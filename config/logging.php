@@ -35,7 +35,7 @@ return [
                     'ignore_exceptions' => false,
                 ],
 
-        'sample' => [
+        'logging' => [
             'driver' => 'custom',
             'handler' => Quinn\Logging\LoggingHandler::class,
             'via' => Quinn\Logging\BaseLogger::class,

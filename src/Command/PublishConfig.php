@@ -54,7 +54,7 @@ class PublishConfig extends Command
                 "ignore_exceptions" => false,
             ],';
 
-        $insert = '"sample" => [
+        $insert = '"logging" => [
             "driver" => "custom",
             "handler" => Quinn\Logging\LoggingHandler::class,
             "via" => Quinn\Logging\BaseLogger::class,
