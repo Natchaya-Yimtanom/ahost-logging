@@ -12,7 +12,7 @@ class ActivateAllCommand extends Command
      *
      * @var string
      */
-    protected $name = 'quinn-logging:activate-all';
+    protected $name = 'logging:activate';
 
     /**
      * The console command description.

@@ -13,7 +13,7 @@ class TruncateTable extends Command
      *
      * @var string
      */
-    protected $name = 'quinn-logging:truncate-table';
+    protected $name = 'logging:truncate';
 
     /**
      * The console command description.
