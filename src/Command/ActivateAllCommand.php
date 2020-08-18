@@ -47,7 +47,9 @@ class ActivateAllCommand extends Command
         for ($i = 0; $i < $lineCount- 1; $i++) {
             fwrite($f, $lines[$i]);
         }
-        fwrite($f, '$router->get("log","CustomController@test");'.PHP_EOL."\n");
+        fwrite($f, '$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {
+            $router->get("log", "CustomController@test");
+        });'.PHP_EOL."\n");
         fwrite($f, $lines[$lineCount-1]);
         fclose($f);
         $this->info('Successfully insert route in web.php!');
