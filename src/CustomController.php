@@ -44,7 +44,11 @@ class CustomController extends Controller
         } 
         catch (Exception $e) {
             $this->baseLogger->error($e);
-            // $exception = $e->getMessage().' at file '.$e->getFile().' at line '.$e->getLine();
         }
+    }
+
+    public function view()
+    {
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php');
     }
 }

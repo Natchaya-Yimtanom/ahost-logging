@@ -28,10 +28,6 @@ class ActivateAllCommand extends Command
      */
     public function handle()
     {
-        // $this->call('quinn-logging:add-route');
-        // $this->call('quinn-logging:publish-migrations');
-        // $this->call('quinn-logging:publish-config');
-
         //////////////////////insert route//////////////////////
 
         //insert route in web.php
@@ -48,7 +44,7 @@ class ActivateAllCommand extends Command
             fwrite($f, $lines[$i]);
         }
         fwrite($f, '$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {
-            $router->get("log", "CustomController@test");
+        $router->get("log", "CustomController@test");
         });'.PHP_EOL."\n");
         fwrite($f, $lines[$lineCount-1]);
         fclose($f);
@@ -100,12 +96,12 @@ class ActivateAllCommand extends Command
         //publish migrations files
         $this->info('Publishing migrations files...');
 
-        if(!file_exists('2020_08_05_095336_sample.php')){
+        if(!file_exists('2020_08_05_095336_logging.php')){
 
             (new Publisher($this))->publishFile(
-                realpath(__DIR__.'/../../database/migrations/').'/2020_08_05_095336_sample.php',
+                realpath(__DIR__.'/../../database/migrations/').'/2020_08_05_095336_logging.php',
                 database_path('migrations'),
-                '2020_08_05_095336_sample.php'
+                '2020_08_05_095336_logging.php'
             );
         }
 
@@ -116,7 +112,8 @@ class ActivateAllCommand extends Command
         $this->call('migrate', ['--force' => true,]);
         $this->comment('Migrations all done!');
 
-        ////////////////////// DONE //////////////////////
+        ////////////////////// ALL DONE //////////////////////
+
         $this->info('Successfully activate all command in packages');
     }
 }
