@@ -32,7 +32,7 @@ class CustomController extends Controller
     {
         try{
             //success
-            // $this->baseLogger->info('INFO: Action log info tests');
+            $this->baseLogger->info('INFO: Action log info tests');
             // $this->baseLogger->debug('DEBUG: Action log debug tests');
             // $this->baseLogger->error('ERROR: Action log error tests');
             // $this->baseLogger->emergency('EMERGENCY: Action log emergency tests');
@@ -42,7 +42,7 @@ class CustomController extends Controller
             // $this->baseLogger->critical('CRITICAL: Action log critical tests');
 
             //error
-            Logging::channel('sample')->error($message);
+            // Logging::channel('sample')->error($message);
         } 
         catch (Exception $e) {
             $this->baseLogger->error($e);
@@ -51,9 +51,8 @@ class CustomController extends Controller
 
     public function view()
     {
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php');
-        $users = DB::select('select * from logging order by date,time desc');
-        // $users = DB::select('select SUBSTRING(message, 1, CHARINDEX("Stack", message)) AS ExtractString from logging');
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['users'=>$users]);
+        $users = DB::select('select * from logging order by date desc,time desc');
+        $dates = DB::select('select distinct date from logging order by date desc');
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['users'=>$users],['dates'=>$dates]);
     }
 }

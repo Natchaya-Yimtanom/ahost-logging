@@ -16,18 +16,19 @@ class Logging extends Migration
         Schema::create('logging', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user');
-            $table->longText('message');
-            $table->longText('context');
             $table->string('level')->index();
             $table->string('level_name');
+            $table->longText('message');
+            $table->longText('stack')->nullable();
             $table->string('channel')->index();
-            // $table->string('record_datetime');
             $table->string('date');
             $table->string('time');
+            $table->longText('context');
             $table->longText('extra');
-            $table->longText('formatted');
             $table->string('remote_addr')->nullable();
             $table->string('user_agent')->nullable();
+            // $table->longText('formatted');
+            // $table->string('record_datetime');
         });
     }
 

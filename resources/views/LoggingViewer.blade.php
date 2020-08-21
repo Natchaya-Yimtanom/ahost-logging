@@ -15,13 +15,64 @@
             background-color: grey;
         }
 
-        .th{
+        .levelCell{
+            width: 80px;
+        }
+
+        .dateCell{
             width: 110px;
         }
 
-    </style>
+        .status[data-status="ERROR"]{
+            background-color: #DC143C;
+            color : white;
+        }
 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        .status[data-status="INFO"]{
+            background-color: #1E90FF;
+            color : white;
+        }
+
+        .status[data-status="WARNING"]{
+            background-color: #FFD700;
+            color : black;
+        }
+
+        .status[data-status="DEBUG"]{
+            background-color: grey;
+            color : white;
+        }
+
+        .status[data-status="EMERGENCY"]{
+            background-color: #FF7F50;
+            color : white;
+        }
+
+        .status[data-status="NOTICE"]{
+            background-color: #87CEFA;
+            color : white;
+        }
+
+        .status[data-status="CRITICAL"]{
+            background-color: #8B0000;
+            color : white;
+        }
+
+        .status[data-status="ALERT"]{
+            background-color: #0000CD;
+            color : white;
+        }
+
+        .seeAll{
+            border: none;
+            background-color: transparent;
+            color: grey;
+            font-size: 12px;
+        }
+
+    </style>
+    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
+
 </head>
 
 <body>
@@ -29,32 +80,39 @@
         <div class="row">
             <div class="col sidebar mb-3 color1">
                 <h1>Log Viewer</h1>
+                @foreach ($dates as $date)
                 <div class="list-group-item">
-                    <a>1</a>
-                    <div class="list-group-folder">
-                        <a>2</a>
-                    </div>
+                    <a>{{ $date->date }}</a>
                 </div>
+                @endforeach
             </div>
 
             <div class="col-10 sidebar mb-3 ">
                 <h1>Log Viewer2</h1>
-                <table class="table table-striped">
+                <table class="table table-striped" id="log">
                     <thead>
                         <tr>
-                            <th>Level</th>
+                            <th class="levelCell">Level</th>
                             <th>User</th>
-                            <th class="th">Date-Time</th>
+                            <th class="dateCell">Date-Time</th>
                             <th>Comment</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
                         <tr>
-                        <td>{{ $user->level_name }}</td>
-                        <td>{{ $user->user }}</td>
-                        <td>{{ $user->date }} {{ $user->time }}</td>
-                        <td>{{ $user->message }}</td>
+                            <td data-status="{{$user->level_name}}" class="status">{{ $user->level_name }}</td>
+                            <td>{{ $user->user }}</td>
+                            <td>{{ $user->date }} {{ $user->time }}</td>
+                            <td id="message" onClick="showStack()">{{ $user->message }} </td>
+
+                            <!-- @if($user->level_name == "ERROR")
+                            <td id="message" onClick="showStack()">{{ $user->message }} 
+                                <button class="seeAll" onClick="showStack($user)">(See all)</button>    
+                            </td>
+                            @else
+                            <td id="message" onClick="showStack()">{{ $user->message }} </td>
+                            @endif -->
                         </tr>
                         @endforeach
                     </tbody>
@@ -62,5 +120,11 @@
             </div>
         </div>
     </div>
+
+    <!-- <script>
+        function showStack($user) {
+            document.getElementById("message").innerHTML = "Hello";
+        }
+    </script> -->
 </body>
 </html>
