@@ -26,41 +26,49 @@
         .status[data-status="ERROR"]{
             background-color: #DC143C;
             color : white;
+            text-align: center;
         }
 
         .status[data-status="INFO"]{
             background-color: #1E90FF;
             color : white;
+            text-align: center;
         }
 
         .status[data-status="WARNING"]{
             background-color: #FFD700;
             color : black;
+            text-align: center;
         }
 
         .status[data-status="DEBUG"]{
             background-color: grey;
             color : white;
+            text-align: center;
         }
 
         .status[data-status="EMERGENCY"]{
             background-color: #FF7F50;
             color : white;
+            text-align: center;
         }
 
         .status[data-status="NOTICE"]{
             background-color: #87CEFA;
             color : white;
+            text-align: center;
         }
 
         .status[data-status="CRITICAL"]{
             background-color: #8B0000;
             color : white;
+            text-align: center;
         }
 
         .status[data-status="ALERT"]{
             background-color: #0000CD;
             color : white;
+            text-align: center;
         }
 
         .seeAll{
@@ -79,7 +87,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col sidebar mb-3 color1">
-                <h1>Log Viewer</h1>
+                <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;" >Log Viewer</h1>
                 @foreach ($dates as $date)
                 <div class="list-group-item">
                     <a>{{ $date->date }}</a>
@@ -88,7 +96,6 @@
             </div>
 
             <div class="col-10 sidebar mb-3 ">
-                <h1>Log Viewer2</h1>
                 <table class="table table-striped" id="log">
                     <thead>
                         <tr>
