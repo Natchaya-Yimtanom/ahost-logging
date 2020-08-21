@@ -19,7 +19,7 @@ class ActivateAllCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Activate all command in packages (Total 3 command)';
+    protected $description = 'Activate all command in packages';
 
     /**
      * Execute the console command.

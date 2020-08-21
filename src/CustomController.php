@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Quinn\Logging\BaseLogger;
 use Quinn\Logging\Logging;
 use Exception;
+use DB;
 
 class CustomController extends Controller
 {
@@ -13,6 +14,7 @@ class CustomController extends Controller
      * @var BaseLogger
      */
     private $baseLogger;
+    private $users;
 
     /**
      * Create a new controller instance.
@@ -49,6 +51,9 @@ class CustomController extends Controller
 
     public function view()
     {
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php');
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php');
+        $users = DB::select('select * from logging order by date,time desc');
+        // $users = DB::select('select SUBSTRING(message, 1, CHARINDEX("Stack", message)) AS ExtractString from logging');
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['users'=>$users]);
     }
 }
