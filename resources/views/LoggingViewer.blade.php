@@ -11,8 +11,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 
     <style>
+
         .color1{
-            background-color: grey;
+            background-color: #A9A9A9;
         }
 
         .levelCell{
@@ -78,6 +79,15 @@
             font-size: 12px;
         }
 
+        #stack{
+            display: none;
+            white-space: pre-line;
+        }
+
+        #see:focus + div#stack{
+            display: block;
+        }
+
     </style>
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
 
@@ -87,7 +97,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col sidebar mb-3 color1">
-                <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;" >Log Viewer</h1>
+                <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">Log Viewer</h1>
                 @foreach ($dates as $date)
                 <div class="list-group-item">
                     <a>{{ $date->date }}</a>
@@ -99,9 +109,9 @@
                 <table class="table table-striped" id="log">
                     <thead>
                         <tr>
-                            <th class="levelCell">Level</th>
-                            <th>User</th>
-                            <th class="dateCell">Date-Time</th>
+                            <th class="levelCell" style="text-align: center">Level</th>
+                            <th style="text-align: center">User</th>
+                            <th class="dateCell" style="text-align: center">Date-Time</th>
                             <th>Comment</th>
                         </tr>
                     </thead>
@@ -111,15 +121,18 @@
                             <td data-status="{{$user->level_name}}" class="status">{{ $user->level_name }}</td>
                             <td>{{ $user->user }}</td>
                             <td>{{ $user->date }} {{ $user->time }}</td>
-                            <td id="message" onClick="showStack()">{{ $user->message }} </td>
-
-                            <!-- @if($user->level_name == "ERROR")
-                            <td id="message" onClick="showStack()">{{ $user->message }} 
-                                <button class="seeAll" onClick="showStack($user)">(See all)</button>    
+                            
+                            @if($user->level_name == "ERROR")
+                            <td id="message">{{ $user->message }} 
+                                <button id="see" class="seeAll">See All</button>
+                                <div id="stack">
+                                    {{ $user->stack }}
+                                </div>
                             </td>
                             @else
-                            <td id="message" onClick="showStack()">{{ $user->message }} </td>
-                            @endif -->
+                            <td>{{ $user->message }} </td>
+                            @endif
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -128,10 +141,5 @@
         </div>
     </div>
 
-    <!-- <script>
-        function showStack($user) {
-            document.getElementById("message").innerHTML = "Hello";
-        }
-    </script> -->
 </body>
 </html>
