@@ -12,17 +12,9 @@
 
     <style>
 
-        .color1{
-            background-color: #A9A9A9;
-        }
-
-        .levelCell{
-            width: 80px;
-        }
-
-        .dateCell{
-            width: 110px;
-        }
+        .color1{ background-color: #A9A9A9; }
+        .levelCell{ width: 80px; }
+        .dateCell{ width: 110px; }
 
         .status[data-status="ERROR"]{
             background-color: #DC143C;
@@ -79,6 +71,17 @@
             font-size: 12px;
         }
 
+        .logDate{
+            padding: 10px;
+            border: none;
+            width: 100%;
+        }
+
+        .select{
+            margin-top: 10px;
+            border: none;
+        }
+
         #stack{
             display: none;
             white-space: pre-line;
@@ -86,6 +89,12 @@
 
         #see:focus + div#stack{
             display: block;
+        }
+
+        #date{
+            border: none;
+            background-color: transparent;
+            font-size: 16px;
         }
 
     </style>
@@ -98,11 +107,14 @@
         <div class="row">
             <div class="col sidebar mb-3 color1">
                 <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">Log Viewer</h1>
-                @foreach ($dates as $date)
-                <div class="list-group-item">
-                    <a>{{ $date->date }}</a>
-                </div>
-                @endforeach
+                <form>
+                    <select name="log_date" class="logDate" id="dropdownDate">
+                    @foreach ($dates as $date)
+                        <option id="date" value="{{ $date->date }}">{{ $date->date }}</option>
+                    @endforeach
+                    </select>
+                    <input type="submit" value="Select" class="select">
+                </form>
             </div>
 
             <div class="col-10 sidebar mb-3 ">

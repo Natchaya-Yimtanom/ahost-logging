@@ -49,6 +49,13 @@ class CustomController extends Controller
         }
     }
 
+    // public function view()
+    // {
+    //     $users = DB::select('select * from logging order by date desc,time desc');
+    //     $dates = DB::select('select distinct date from logging order by date desc');
+    //     return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['users'=>$users],['dates'=>$dates]);
+    // }
+
     public function view()
     {
         $users = DB::select('select * from logging order by date desc,time desc');
