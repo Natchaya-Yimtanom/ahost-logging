@@ -88,11 +88,4 @@ class BaseLogger extends Logger{
         Log::channel('logging')->critical($message);
     }
 
-    public function clearLog()
-    {
-        Logging::truncate();
-        parent::info('Delete all data in table', ['user' => get_current_user()]);
-        Log::channel('logging')->info('Delete all data in table');
-    }
-
 }
