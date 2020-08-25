@@ -61,8 +61,8 @@ class CustomController extends Controller
                 ->orderBy('date', 'desc')
                 ->orderBy('time', 'desc')
                 ->get();
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
-        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
     }
 
     //show selected date data in log viewer
@@ -79,7 +79,7 @@ class CustomController extends Controller
                 ->orderBy('date', 'desc')
                 ->orderBy('time', 'desc')
                 ->get();
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
-        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
     }
 }
