@@ -135,7 +135,7 @@
                     <thead>
                         <tr>
                             <th class="levelCell" style="text-align: center">Level</th>
-                            <th style="text-align: center">User</th>
+                            <th class="dateCell" style="text-align: center">User</th>
                             <th class="dateCell" style="text-align: center">Date-Time</th>
                             <th>Comment</th>
                         </tr>
@@ -144,7 +144,7 @@
                         @foreach ($users as $user)
                         <tr>
                             <td data-status="{{$user->level_name}}" class="status">{{ $user->level_name }}</td>
-                            <td>{{ $user->user }}</td>
+                            <td style="text-align: center">{{ $user->user }}</td>
                             <td>{{ $user->date }} {{ $user->time }}</td>
                             
                             @if($user->level_name == "ERROR")

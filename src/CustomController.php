@@ -31,7 +31,7 @@ class CustomController extends Controller
     {
         try{
             //success
-            // $this->baseLogger->info('INFO: Action log info tests');
+            $this->baseLogger->info('INFO: Action log info tests');
             // $this->baseLogger->debug('DEBUG: Action log debug tests');
             // $this->baseLogger->error('ERROR: Action log error tests');
             // $this->baseLogger->emergency('EMERGENCY: Action log emergency tests');
@@ -41,7 +41,7 @@ class CustomController extends Controller
             // $this->baseLogger->critical('CRITICAL: Action log critical tests');
 
             //error
-            Logging::channel('sample')->error($message);
+            // Logging::channel('sample')->error($message);
         } 
         catch (Exception $e) {
             $this->baseLogger->error($e);
