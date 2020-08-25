@@ -44,8 +44,10 @@ class ActivateAllCommand extends Command
             fwrite($f, $lines[$i]);
         }
         fwrite($f, '$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {
-        $router->get("log", "CustomController@test");
-        });'.PHP_EOL."\n");
+            $router->get("log", "CustomController@test");
+            $router->get("log/view", ["as"=> "view", "uses"=>"CustomController@view"]);
+            $router->get("log/{id}/view", ["as"=> "show", "uses"=>"CustomController@show"]);
+    });'.PHP_EOL."\n");
         fwrite($f, $lines[$lineCount-1]);
         fclose($f);
         $this->info('Successfully insert route in web.php!');
