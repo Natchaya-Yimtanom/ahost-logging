@@ -51,7 +51,7 @@ class ActivateAllCommand extends Command
         });'.PHP_EOL."\n");
         fwrite($f, $lines[$lineCount-1]);
         fclose($f);
-        $this->info('Successfully insert route in web.php!');
+        $this->info('Insert route in web.php');
 
         //////////////////////publish config file//////////////////////
 
@@ -92,7 +92,7 @@ class ActivateAllCommand extends Command
         $file_contents = str_replace($search , $replace , $file_contents);
         file_put_contents($path_to_file,$file_contents);
         }
-        $this->info('Successfully publish config file/folder!');
+        $this->info('Publish config file/folder');
 
         //////////////////////publish migrations file//////////////////////
 
@@ -108,8 +108,6 @@ class ActivateAllCommand extends Command
             );
         }
 
-        $this->info('Successfully publish migrations files!');
-
         //run php artisan migrate automatically
         $this->info('Running migrations...');
         $this->call('migrate', ['--force' => true,]);
@@ -117,6 +115,7 @@ class ActivateAllCommand extends Command
 
         //////////////////////set app_key//////////////////////
 
+        //insert app_key in .env file
         $path = base_path('.env');
         $key = Str::random(32);
 
@@ -127,7 +126,7 @@ class ActivateAllCommand extends Command
             );
         }
 
-        $this->info("Successfully set app_key in .env!");
+        $this->info("Set app_key in .env");
 
         ////////////////////// ALL DONE //////////////////////
 
