@@ -11,6 +11,15 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 
     <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover{
+            text-decoration: none;
+            color: 	#696969;
+        }
 
         .color1{ background-color: #A9A9A9; }
         .levelCell{ width: 80px; }
@@ -106,15 +115,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col sidebar mb-3 color1">
-                <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">Log Viewer</h1>
-                <form>
-                    <select name="log_date" class="logDate" id="dropdownDate">
-                    @foreach ($dates as $date)
-                        <option id="date" value="{{ $date->date }}">{{ $date->date }}</option>
-                    @endforeach
-                    </select>
-                    <input type="submit" value="Select" class="select">
-                </form>
+                <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">
+                    <a href="{{route('view') }}">Log Viewer</a>
+                </h1>
+
+                @foreach ($dates as $date)
+                <div class="list-group-item">
+                    <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
+                </div>
+                @endforeach
             </div>
 
             <div class="col-10 sidebar mb-3 ">
@@ -155,3 +164,4 @@
 
 </body>
 </html>
+

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Quinn\Logging\BaseLogger;
 use Quinn\Logging\Logging;
 use Exception;
-use DB;
 
 class CustomController extends Controller
 {
@@ -49,17 +48,34 @@ class CustomController extends Controller
         }
     }
 
-    // public function view()
-    // {
-    //     $users = DB::select('select * from logging order by date desc,time desc');
-    //     $dates = DB::select('select distinct date from logging order by date desc');
-    //     return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['users'=>$users],['dates'=>$dates]);
-    // }
-
     public function view()
     {
-        $users = DB::select('select * from logging order by date desc,time desc');
-        $dates = DB::select('select distinct date from logging order by date desc');
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['users'=>$users],['dates'=>$dates]);
+        $users = Logging::orderBy('date', 'desc')
+                        ->orderBy('time', 'desc')
+                        ->get();
+
+        $dates = Logging::distinct()
+                ->select('date')
+                ->distinct()
+                ->orderBy('date', 'desc')
+                ->orderBy('time', 'desc')
+                ->get();
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+    }
+
+    public function show($id)
+    {
+        $users = Logging::where('date', 'like', $id)
+                        ->orderBy('date', 'desc')
+                        ->orderBy('time', 'desc')
+                        ->get();
+
+        $dates = Logging::distinct()
+                ->select('date')
+                ->distinct()
+                ->orderBy('date', 'desc')
+                ->orderBy('time', 'desc')
+                ->get();
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
     }
 }
