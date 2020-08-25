@@ -2,6 +2,7 @@
 
 namespace Quinn\Logging;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Quinn\Logging\Helpers\Publisher;
 
@@ -113,6 +114,20 @@ class ActivateAllCommand extends Command
         $this->info('Running migrations...');
         $this->call('migrate', ['--force' => true,]);
         $this->comment('Migrations all done!');
+
+        //////////////////////set app_key//////////////////////
+
+        $path = base_path('.env');
+        $key = Str::random(32);
+
+        if (file_exists($path)) {
+            file_put_contents(
+                $path,
+                str_replace('APP_KEY=' . env('APP_KEY'), 'APP_KEY=' . $key, file_get_contents($path))
+            );
+        }
+
+        $this->info("Successfully set app_key in .env!");
 
         ////////////////////// ALL DONE //////////////////////
 
