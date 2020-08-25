@@ -60,7 +60,8 @@ class CustomController extends Controller
                 ->orderBy('date', 'desc')
                 ->orderBy('time', 'desc')
                 ->get();
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        return view()->file('..\vendor\quinn\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
     }
 
     public function show($id)
@@ -76,6 +77,7 @@ class CustomController extends Controller
                 ->orderBy('date', 'desc')
                 ->orderBy('time', 'desc')
                 ->get();
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        return view()->file('..\vendor\quinn\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
     }
 }

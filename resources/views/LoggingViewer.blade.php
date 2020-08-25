@@ -21,9 +21,13 @@
             color: 	#696969;
         }
 
-        .color1{ background-color: #A9A9A9; }
         .levelCell{ width: 80px; }
         .dateCell{ width: 110px; }
+        
+        .color1{ 
+            background-color: #A9A9A9; 
+            padding-bottom: 20px;
+        }
 
         .status[data-status="ERROR"]{
             background-color: #DC143C;

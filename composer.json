@@ -10,8 +10,18 @@
         }
     ],
     "autoload": {
+        "classmap": [
+            "src"
+        ],
         "psr-4": {
-            "Quinn\\Logging\\": "src"
+            "Quinn\\Logging\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Quinn\\Logging\\LoggingServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
