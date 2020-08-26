@@ -75,11 +75,7 @@ class ActivateAllCommand extends Command
         $path_to_file = 'config/logging.php';
         $file_contents = file_get_contents($path_to_file);
         $search = '"channels" => [
-            "stack" => [
-                "driver" => "stack",
-                "channels" => ["database", "file"],
-                "ignore_exceptions" => false,
-            ],';
+            ';
 
         $insert = '"logging" => [
             "driver" => "custom",
@@ -112,21 +108,6 @@ class ActivateAllCommand extends Command
         $this->info('Running migrations...');
         $this->call('migrate', ['--force' => true,]);
         $this->comment('Migrations all done!');
-
-        //////////////////////set app_key//////////////////////
-
-        //insert app_key in .env file
-        $path = base_path('.env');
-        $key = Str::random(32);
-
-        if (file_exists($path)) {
-            file_put_contents(
-                $path,
-                str_replace('APP_KEY=' . env('APP_KEY'), 'APP_KEY=' . $key, file_get_contents($path))
-            );
-        }
-
-        $this->info("Set app_key in .env");
 
         ////////////////////// ALL DONE //////////////////////
 
