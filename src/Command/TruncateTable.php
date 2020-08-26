@@ -29,7 +29,9 @@ class TruncateTable extends Command
      */
     public function handle()
     {
+        $path = 'storage/logs/custom_logs/' . date('Y-m-d') . '.log';
+        unlink($path);
         Logging::truncate();
-        $this->info('Successfully delete all data in table!');
+        $this->info('Successfully delete all data in table and file!');
     }
 }

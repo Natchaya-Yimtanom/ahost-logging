@@ -30,28 +30,30 @@ class ActivateAllCommand extends Command
     public function handle()
     {
         //////////////////////insert route//////////////////////
-
-        //insert route in web.php
-        $file = "routes/web.php";
-        $fc = fopen($file, "r");
-        while (!feof($fc)) {
-            $buffer = fgets($fc, 4096);
-            $lines[] = $buffer;
+        if( strpos(file_get_contents("routes/web.php"),'$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {') !== false) {
+        }else{
+            //insert route in web.php
+            $file = "routes/web.php";
+            $fc = fopen($file, "r");
+            while (!feof($fc)) {
+                $buffer = fgets($fc, 4096);
+                $lines[] = $buffer;
+            }
+            fclose($fc);
+            $f = fopen($file, "r+") or die("couldn't open $file");
+            $lineCount = count($lines);
+            for ($i = 0; $i < $lineCount; $i++) {
+                fwrite($f, $lines[$i]);
+            }
+            fwrite($f,"\n".'$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {
+                $router->get("log", "CustomController@test");
+                $router->get("log/view", ["as"=> "view", "uses"=>"CustomController@view"]);
+                $router->get("log/{id}/view", ["as"=> "show", "uses"=>"CustomController@show"]); 
+            });'.PHP_EOL."\n");
+            fwrite($f, $lines[$lineCount-1]);
+            fclose($f);
+            $this->info('Insert route in web.php');
         }
-        fclose($fc);
-        $f = fopen($file, "r+") or die("couldn't open $file");
-        $lineCount = count($lines);
-        for ($i = 0; $i < $lineCount; $i++) {
-            fwrite($f, $lines[$i]);
-        }
-        fwrite($f,"\n".'$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {
-            $router->get("log", "CustomController@test");
-            $router->get("log/view", ["as"=> "view", "uses"=>"CustomController@view"]);
-            $router->get("log/{id}/view", ["as"=> "show", "uses"=>"CustomController@show"]); 
-        });'.PHP_EOL."\n");
-        fwrite($f, $lines[$lineCount-1]);
-        fclose($f);
-        $this->info('Insert route in web.php');
 
         //////////////////////publish config file//////////////////////
 

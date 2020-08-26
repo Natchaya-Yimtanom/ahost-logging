@@ -95,6 +95,11 @@
             border: none;
         }
 
+        .dateSelect{
+            border: none;
+            padding: 5px 0px 5px 5px;
+        }
+
         #stack{
             display: none;
             white-space: pre-line;
@@ -112,6 +117,7 @@
 
     </style>
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
 
@@ -122,12 +128,22 @@
                 <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">
                     <a href="{{route('view') }}">Log Viewer</a>
                 </h1>
+                    <!-- @foreach ($dates as $date)
+                    <div class="list-group-item">
+                        <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
+                    </div>
+                    @endforeach -->
 
-                @foreach ($dates as $date)
-                <div class="list-group-item">
-                    <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
-                </div>
-                @endforeach
+                    <div id="selectDate" style="margin-bottom: 10px;">
+                        <select id="year" class="dateSelect" style="width: 30%;"></select>
+                        <select id="month" class="dateSelect" style="width: 68%;" ></select>
+                    </div>
+
+                    @foreach ($dates as $date)
+                    <div class="list-group-item">
+                        <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
+                    </div>
+                    @endforeach
             </div>
 
             <div class="col-10 sidebar mb-3 ">
@@ -169,3 +185,39 @@
 </body>
 </html>
 
+<script>
+$(document).ready(function() {
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+  var qntYears = 4;
+  var selectYear = $("#year");
+  var selectMonth = $("#month");
+  var currentYear = new Date().getFullYear();
+  
+  for (var y = 0; y < qntYears; y++){
+    let date = new Date(currentYear);
+    var yearElem = document.createElement("option");
+    yearElem.value = currentYear 
+    yearElem.textContent = currentYear;
+    selectYear.append(yearElem);
+    currentYear--;
+  } 
+
+  for (var m = 0; m < 12; m++){
+      let monthNum = new Date(2018, m).getMonth()
+      let month = monthNames[monthNum];
+      var monthElem = document.createElement("option");
+      monthElem.value = monthNum; 
+      monthElem.textContent = month;
+      selectMonth.append(monthElem);
+    }
+
+    var d = new Date();
+    var month = d.getMonth();
+    var year = d.getFullYear();
+
+    selectYear.val(year); 
+    selectMonth.val(month);    
+});
+</script>
