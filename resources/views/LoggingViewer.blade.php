@@ -90,14 +90,15 @@
             width: 100%;
         }
 
-        .select{
-            margin-top: 10px;
-            border: none;
-        }
-
         .dateSelect{
             border: none;
             padding: 5px 0px 5px 5px;
+        }
+
+        .selectBtn{
+            border: none;
+            margin-bottom: 30px;
+            width: 100%;
         }
 
         #stack{
@@ -134,10 +135,30 @@
                     </div>
                     @endforeach -->
 
-                    <div id="selectDate" style="margin-bottom: 10px;">
+                    <!-- <div id="selectDate" style="margin-bottom: 10px; width: 100%">
                         <select id="year" class="dateSelect" style="width: 30%;"></select>
                         <select id="month" class="dateSelect" style="width: 68%;" ></select>
-                    </div>
+                    </div> -->
+                    
+                    <!-- <select id="month"></select> -->
+                    <form action="send" method="post">
+                        <select id="comboA"  name="select" style="width: 68%; height: 30px;">
+                            <option value="">Select combo</option>
+                            <option value="01">JAN</option>
+                            <option value="02">FEB</option>
+                            <option value="03">MAR</option>
+                            <option value="04">APR</option>
+                            <option value="05">MAY</option>
+                            <option value="06">JUN</option>
+                            <option value="07">JUL</option>
+                            <option value="08">AUG</option>
+                            <option value="09">SEP</option>
+                            <option value="10">OCT</option>
+                            <option value="11">NOV</option>
+                            <option value="12">DEC</option>
+                        </select>
+                        <input type="submit" class="selectBtn" id="btn" value="Submit" style="width:30%; height: 30px;">
+                    </form>
 
                     @foreach ($dates as $date)
                     <div class="list-group-item">
@@ -183,9 +204,10 @@
     </div>
 
 </body>
+
 </html>
 
-<script>
+<!-- <script>
 $(document).ready(function() {
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -220,4 +242,4 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
     selectYear.val(year); 
     selectMonth.val(month);    
 });
-</script>
+</script> -->

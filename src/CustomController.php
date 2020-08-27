@@ -5,6 +5,7 @@ namespace Quinn\Logging;
 use App\Http\Controllers\Controller;
 use Quinn\Logging\BaseLogger;
 use Quinn\Logging\Logging;
+use Illuminate\Http\Request;
 use Exception;
 
 class CustomController extends Controller
@@ -31,7 +32,7 @@ class CustomController extends Controller
     {
         try{
             //success
-            $this->baseLogger->info('INFO: Action log info tests');
+            // $this->baseLogger->info('INFO: Action log info tests');
             // $this->baseLogger->debug('DEBUG: Action log debug tests');
             // $this->baseLogger->error('ERROR: Action log error tests');
             // $this->baseLogger->emergency('EMERGENCY: Action log emergency tests');
@@ -41,7 +42,7 @@ class CustomController extends Controller
             // $this->baseLogger->critical('CRITICAL: Action log critical tests');
 
             //error
-            // Logging::channel('sample')->error($message);
+            Logging::channel('sample')->error($message);
         } 
         catch (Exception $e) {
             $this->baseLogger->error($e);
@@ -49,7 +50,7 @@ class CustomController extends Controller
     }
 
     //show all data in log viewer
-    public function view()
+    public function view(Request $request)
     {
         $users = Logging::orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
@@ -61,7 +62,8 @@ class CustomController extends Controller
                 ->orderBy('date', 'desc')
                 ->orderBy('time', 'desc')
                 ->get();
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
     }
 
     //show selected date data in log viewer
@@ -78,6 +80,27 @@ class CustomController extends Controller
                 ->orderBy('date', 'desc')
                 ->orderBy('time', 'desc')
                 ->get();
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+    }
+
+
+    public function send(Request $request)
+    {
+        $data = '%'.$request->select.'%';
+        $users = Logging::where('date','like', $data)
+                        ->orderBy('date', 'desc')
+                        ->orderBy('time', 'desc')
+                        ->get();
+
+        $dates = Logging::distinct()
+                ->select('date')
+                ->distinct()
+                ->where('date','like', $data)
+                ->orderBy('date', 'desc')
+                ->orderBy('time', 'desc')
+                ->get();
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
     }
 }
