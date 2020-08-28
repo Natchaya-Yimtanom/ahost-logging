@@ -116,6 +116,13 @@
             font-size: 16px;
         }
 
+        #select{
+            width: 100%; 
+            height: 30px;
+            margin-bottom: 20px;
+
+        }
+
     </style>
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -127,44 +134,44 @@
         <div class="row">
             <div class="col sidebar mb-3 color1">
                 <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">
-                    <a href="{{route('view') }}">Log Viewer</a>
+                    <a href="{{route('view')}}">Log Viewer</a>
                 </h1>
-                    <!-- @foreach ($dates as $date)
-                    <div class="list-group-item">
-                        <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
-                    </div>
-                    @endforeach -->
-
-                    <!-- <div id="selectDate" style="margin-bottom: 10px; width: 100%">
-                        <select id="year" class="dateSelect" style="width: 30%;"></select>
-                        <select id="month" class="dateSelect" style="width: 68%;" ></select>
-                    </div> -->
                     
-                    <!-- <select id="month"></select> -->
-                    <form action="send" method="post">
-                        <select id="comboA"  name="select" style="width: 68%; height: 30px;">
-                            <option value="">Select combo</option>
-                            <option value="01">JAN</option>
-                            <option value="02">FEB</option>
-                            <option value="03">MAR</option>
-                            <option value="04">APR</option>
-                            <option value="05">MAY</option>
-                            <option value="06">JUN</option>
-                            <option value="07">JUL</option>
-                            <option value="08">AUG</option>
-                            <option value="09">SEP</option>
-                            <option value="10">OCT</option>
-                            <option value="11">NOV</option>
-                            <option value="12">DEC</option>
+                    <!-- <form action="send" method="post">
+                        <select id="year" name="year" style="width: 38%; height: 30px;"></select>
+                        <select id="month" name="month" style="width: 60%; height: 30px;"></select>
+                        <input type="submit" class="selectBtn" id="btn" value="Search" style="height: 30px; margin-top:10px;">
+                    </form> -->
+
+                    <form method="post" id="selectDropdown" action="{{route('send')}}">
+                        <select id="select"  name="select" onchange="document.getElementById('selectDropdown').submit();">
+                            <option value="">Select</option>
+                            <option value="01">January</option>
+                            <option value="02">Febuary</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
                         </select>
-                        <input type="submit" class="selectBtn" id="btn" value="Submit" style="width:30%; height: 30px;">
                     </form>
 
-                    @foreach ($dates as $date)
-                    <div class="list-group-item">
-                        <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
-                    </div>
-                    @endforeach
+                    <h3 id="showMonth" style="text-align: center; margin-bottom: 20px;">{{$select}}</h3>
+
+                    @if($dates->isEmpty())
+                    <p style="text-align: center;">There is no log in {{$select}}</p>
+                    @else
+                        @foreach ($dates as $date)
+                        <div class="list-group-item">
+                            <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
+                        </div>
+                        @endforeach
+                    @endif
             </div>
 
             <div class="col-10 sidebar mb-3 ">
@@ -178,6 +185,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @if($users->isEmpty())
+                    <tr>
+                        <td colspan="4" >No data available</td>
+                    </tr>
+                    @else
                         @foreach ($users as $user)
                         <tr>
                             <td data-status="{{$user->level_name}}" class="status">{{ $user->level_name }}</td>
@@ -194,25 +206,25 @@
                             @else
                             <td>{{ $user->message }} </td>
                             @endif
-
                         </tr>
                         @endforeach
                     </tbody>
+                    @endif
                 </table>
             </div>
         </div>
     </div>
 
 </body>
-
 </html>
+
 
 <!-- <script>
 $(document).ready(function() {
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
-  var qntYears = 4;
+  var qntYears = 2;
   var selectYear = $("#year");
   var selectMonth = $("#month");
   var currentYear = new Date().getFullYear();
