@@ -27,6 +27,7 @@
         .color1{ 
             background-color: #A9A9A9; 
             padding-bottom: 20px;
+            min-height: 100vh;
         }
 
         .status[data-status="ERROR"]{
@@ -120,7 +121,6 @@
             width: 100%; 
             height: 30px;
             margin-bottom: 20px;
-
         }
 
     </style>
@@ -132,20 +132,14 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col sidebar mb-3 color1">
+            <div class="col sidebar color1">
                 <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">
                     <a href="{{route('view')}}">Log Viewer</a>
                 </h1>
-                    
-                    <!-- <form action="send" method="post">
-                        <select id="year" name="year" style="width: 38%; height: 30px;"></select>
-                        <select id="month" name="month" style="width: 60%; height: 30px;"></select>
-                        <input type="submit" class="selectBtn" id="btn" value="Search" style="height: 30px; margin-top:10px;">
-                    </form> -->
 
                     <form method="post" id="selectDropdown" action="{{route('send')}}">
                         <select id="select"  name="select" onchange="document.getElementById('selectDropdown').submit();">
-                            <option value="">Select</option>
+                            <option value="">Select Month</option>
                             <option value="01">January</option>
                             <option value="02">Febuary</option>
                             <option value="03">March</option>
@@ -174,7 +168,7 @@
                     @endif
             </div>
 
-            <div class="col-10 sidebar mb-3 ">
+            <div class="col-10 sidebar mb-3">
                 <table class="table table-striped" id="log">
                     <thead>
                         <tr>
@@ -187,7 +181,7 @@
                     <tbody>
                     @if($users->isEmpty())
                     <tr>
-                        <td colspan="4" >No data available</td>
+                        <td colspan="4">No data available</td>
                     </tr>
                     @else
                         @foreach ($users as $user)
@@ -217,41 +211,3 @@
 
 </body>
 </html>
-
-
-<!-- <script>
-$(document).ready(function() {
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-  var qntYears = 2;
-  var selectYear = $("#year");
-  var selectMonth = $("#month");
-  var currentYear = new Date().getFullYear();
-  
-  for (var y = 0; y < qntYears; y++){
-    let date = new Date(currentYear);
-    var yearElem = document.createElement("option");
-    yearElem.value = currentYear 
-    yearElem.textContent = currentYear;
-    selectYear.append(yearElem);
-    currentYear--;
-  } 
-
-  for (var m = 0; m < 12; m++){
-      let monthNum = new Date(2018, m).getMonth()
-      let month = monthNames[monthNum];
-      var monthElem = document.createElement("option");
-      monthElem.value = monthNum; 
-      monthElem.textContent = month;
-      selectMonth.append(monthElem);
-    }
-
-    var d = new Date();
-    var month = d.getMonth();
-    var year = d.getFullYear();
-
-    selectYear.val(year); 
-    selectMonth.val(month);    
-});
-</script> -->

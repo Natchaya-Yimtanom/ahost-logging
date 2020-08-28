@@ -32,7 +32,7 @@ class CustomController extends Controller
     {
         try{
             //success
-            // $this->baseLogger->info('INFO: Action log info tests');
+            $this->baseLogger->info('INFO: Action log info tests');
             // $this->baseLogger->debug('DEBUG: Action log debug tests');
             // $this->baseLogger->error('ERROR: Action log error tests');
             // $this->baseLogger->emergency('EMERGENCY: Action log emergency tests');
@@ -42,7 +42,7 @@ class CustomController extends Controller
             // $this->baseLogger->critical('CRITICAL: Action log critical tests');
 
             //error
-            Logging::channel('sample')->error($message);
+            // Logging::channel('sample')->error($message);
         } 
         catch (Exception $e) {
             $this->baseLogger->error($e);
@@ -66,14 +66,23 @@ class CustomController extends Controller
                 ->orderBy('date', 'desc')
                 ->orderBy('time', 'desc')
                 ->get();
-        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
         return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users , 'select' => $select]);
     }
 
     //show selected date data in log viewer
     public function show($id)
     {
-        $select = '';
+        if (strpos($id, "-")) { 
+            $startCharCount = strpos($id, "-") + strlen("-");
+            $firstSubStr = substr($id, $startCharCount, strlen($id));
+            $endCharCount = strpos($firstSubStr, "-");
+            if ($endCharCount == 0) {
+                $endCharCount = strlen($firstSubStr);
+            }
+            $select = substr($firstSubStr, 0, $endCharCount);
+        }
+
         $users = Logging::where('date', 'like', $id)
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
@@ -81,18 +90,21 @@ class CustomController extends Controller
 
         $dates = Logging::distinct()
                 ->select('date')
+                ->where('date', 'like','%-'.$select.'-%')
                 ->orderBy('date', 'desc')
                 ->orderBy('time', 'desc')
                 ->get();
-        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',compact('users'),compact('dates'));
+                
+        $select = date("F", mktime(0, 0, 0, $select, 10));
+
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
         return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
     }
 
+    //show selected month data in log viewer
     public function send( Request $request)
     {
-        $select = null;
-        if($request->select) $select = $request->select;
-        $selectQ =Logging::where('date', 'like','%-'.$select.'-%')->get();
+        $select = $request->select;
 
         $users = Logging::where('date', 'like','%-'.$select.'-%')
                         ->orderBy('date', 'desc')
@@ -106,45 +118,10 @@ class CustomController extends Controller
                 ->orderBy('time', 'desc')
                 ->get();
 
-        switch ($select) {
-            case "01":
-                $select = "January";
-                break;
-            case "02":
-                $select = "Febuary";
-                break;
-            case "03":
-                $select = "March";
-                break;
-            case "04":
-                $select = "April";
-                break;
-            case "05":
-                $select = "May";
-                break;
-            case "06":
-                $select = "June";
-                break;
-            case "07":
-                $select = "July";
-                break;
-            case "08":
-                $select = "August";
-                break;
-            case "09":
-                $select = "September";
-                break;
-            case "10":
-                $select = "October";
-                break;
-            case "11":
-                $select = "November";
-                break;
-            case "12":
-                $select = "December";
-        }
+        $select = date("F", mktime(0, 0, 0, $select, 10));
 
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['selectQ'=>$selectQ, 'select' => $select , 'dates' => $dates , 'users' => $users]);
-
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['select' => $select , 'dates' => $dates , 'users' => $users]);
     }
+
 }
