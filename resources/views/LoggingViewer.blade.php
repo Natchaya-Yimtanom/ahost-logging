@@ -24,7 +24,7 @@
         .levelCell{ width: 80px; }
         .dateCell{ width: 110px; }
         
-        .color1{ 
+        .rowColor{ 
             background-color: #A9A9A9; 
             min-height: 100vh;
         }
@@ -85,23 +85,6 @@
             cursor: pointer;
         }
 
-        .logDate{
-            padding: 10px;
-            border: none;
-            width: 100%;
-        }
-
-        .dateSelect{
-            border: none;
-            padding: 5px 0px 5px 5px;
-        }
-
-        .selectBtn{
-            border: none;
-            margin-bottom: 30px;
-            width: 100%;
-        }
-
         .activeDate{
             background-color: #DCDCDC;
         }
@@ -121,12 +104,6 @@
             display: block;
         }
 
-        #date{
-            border: none;
-            background-color: transparent;
-            font-size: 16px;
-        }
-
         #select{
             width: 100%; 
             height: 30px;
@@ -134,7 +111,6 @@
         }
 
     </style>
-    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
@@ -142,7 +118,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col sidebar color1">
+            <div class="col sidebar rowColor">
                 <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">
                     <a href="{{route('view')}}">Log Viewer</a>
                 </h1>
@@ -225,6 +201,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
