@@ -26,7 +26,6 @@
         
         .color1{ 
             background-color: #A9A9A9; 
-            padding-bottom: 20px;
             min-height: 100vh;
         }
 
@@ -161,9 +160,9 @@
                     <p style="text-align: center;">There is no log in {{$select}}</p>
                     @else
                         @foreach ($dates as $date)
-                        <div class="list-group-item">
-                            <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
-                        </div>
+                            <div class="list-group-item">
+                                <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
+                            </div>
                         @endforeach
                     @endif
             </div>
@@ -181,7 +180,7 @@
                     <tbody>
                     @if($users->isEmpty())
                     <tr>
-                        <td colspan="4">No data available</td>
+                        <td colspan="4" style="text-align: center">No log data available in this month</td>
                     </tr>
                     @else
                         @foreach ($users as $user)
