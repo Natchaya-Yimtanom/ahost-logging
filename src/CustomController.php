@@ -66,8 +66,8 @@ class CustomController extends Controller
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
-        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users , 'select' => $select]);
+        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users , 'select' => $select]);
     }
 
     //show selected date data in log viewer
@@ -96,8 +96,8 @@ class CustomController extends Controller
                         ->get();
                 
         $select = date("F", mktime(0, 0, 0, $select, 10));
-        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
+        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
     }
 
     //show selected month data in log viewer
@@ -119,8 +119,8 @@ class CustomController extends Controller
 
         $select = date("F", mktime(0, 0, 0, $select, 10));
 
-        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
-        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['select' => $select , 'dates' => $dates , 'users' => $users]);
+        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['select' => $select , 'dates' => $dates , 'users' => $users]);
     }
 
 }

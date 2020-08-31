@@ -48,7 +48,8 @@ class ActivateAllCommand extends Command
             fwrite($f,"\n".'$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {
                 $router->get("log", "CustomController@test");
                 $router->get("log/view", ["as"=> "view", "uses"=>"CustomController@view"]);
-                $router->get("log/{id}/view", ["as"=> "show", "uses"=>"CustomController@show"]); 
+                $router->get("log/view/{id}", ["as"=> "show", "uses"=>"CustomController@show"]);
+                $router->post("log/send", ["as"=> "send", "uses"=>"CustomController@send"]);
             });'.PHP_EOL."\n");
             fwrite($f, $lines[$lineCount-1]);
             fclose($f);
