@@ -137,6 +137,7 @@
                 </h1>
 
                     <form method="post" id="selectDropdown" action="{{route('send')}}">
+                        @csrf
                         <select id="select"  name="select" onchange="document.getElementById('selectDropdown').submit();">
                             <option value="">Select Month</option>
                             <option value="01">January</option>
