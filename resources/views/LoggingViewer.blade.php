@@ -82,6 +82,7 @@
             background-color: transparent;
             color: grey;
             font-size: 12px;
+            cursor: pointer;
         }
 
         .logDate{
@@ -99,6 +100,16 @@
             border: none;
             margin-bottom: 30px;
             width: 100%;
+        }
+
+        .activeDate{
+            background-color: #DCDCDC;
+        }
+
+        .selectDate{
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
         }
 
         #stack{
@@ -137,9 +148,8 @@
                 </h1>
 
                     <form method="post" id="selectDropdown" action="{{route('send')}}">
-                        @csrf
                         <select id="select"  name="select" onchange="document.getElementById('selectDropdown').submit();">
-                            <option value="">Select Month</option>
+                            <option value="">{{$select}}</option>
                             <option value="01">January</option>
                             <option value="02">Febuary</option>
                             <option value="03">March</option>
@@ -161,14 +171,21 @@
                     <p style="text-align: center;">There is no log in {{$select}}</p>
                     @else
                         @foreach ($dates as $date)
-                            <div class="list-group-item">
-                                <a href="{{route('show', ['id' => $date->date])}}">{{ $date->date }}</a>
-                            </div>
+                            @if($date->date == $id)
+                                <input type="button" value="{{ $date->date }}" class="list-group-item selectDate activeDate "
+                                    onclick="window.location.href='{{route('show', ['id' => $date->date])}}'">
+                            @else
+                                <input type="button" value="{{ $date->date }}" class="list-group-item selectDate"
+                                    onclick="window.location.href='{{route('show', ['id' => $date->date])}}'">
+                            @endif
                         @endforeach
                     @endif
             </div>
 
             <div class="col-10 sidebar mb-3">
+                @if($id != null)
+                    <h3 style="margin: 20px 0px 20px 0px;">Log data in : {{$id}}</h3>
+                @endif
                 <table class="table table-striped" id="log">
                     <thead>
                         <tr>
