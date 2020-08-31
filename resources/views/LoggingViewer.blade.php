@@ -36,7 +36,7 @@
         }
 
         .status[data-status="INFO"]{
-            background-color: #1E90FF;
+            background-color: #32CD32;
             color : white;
             text-align: center;
         }
@@ -48,19 +48,19 @@
         }
 
         .status[data-status="DEBUG"]{
-            background-color: grey;
+            background-color: #00008B;
             color : white;
             text-align: center;
         }
 
         .status[data-status="EMERGENCY"]{
-            background-color: #FF7F50;
+            background-color: #FF8C00;
             color : white;
             text-align: center;
         }
 
         .status[data-status="NOTICE"]{
-            background-color: #87CEFA;
+            background-color: #1E90FF;
             color : white;
             text-align: center;
         }
@@ -72,7 +72,7 @@
         }
 
         .status[data-status="ALERT"]{
-            background-color: #0000CD;
+            background-color: #8B008B;
             color : white;
             text-align: center;
         }
@@ -162,7 +162,7 @@
                 @if($id != null)
                     <h3 style="margin: 20px 0px 20px 0px;">Log data in : {{$id}}</h3>
                 @endif
-                <table class="table table-striped" id="log">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th class="levelCell" style="text-align: center">Level</th>
@@ -183,7 +183,7 @@
                             <td style="text-align: center">{{ $user->user }}</td>
                             <td>{{ $user->date }} {{ $user->time }}</td>
                             
-                            @if($user->level_name == "ERROR")
+                            @if($user->stack != null)
                             <td id="message">{{ $user->message }} 
                                 <button id="see" class="seeAll">See All</button>
                                 <div id="stack">
