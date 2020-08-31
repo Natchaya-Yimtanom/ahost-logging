@@ -68,7 +68,7 @@ class CustomController extends Controller
                         ->get();
 
         $id = '';
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
+        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select, 'id' => $id]);
         // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users , 'select' => $select, 'id' => $id]);
     }
 
@@ -98,7 +98,7 @@ class CustomController extends Controller
                         ->get();
                 
         $select = date("F", mktime(0, 0, 0, $select, 10));
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
+        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select, 'id' => $id]);
         // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select , 'id' => $id]);
     }
 
@@ -121,7 +121,7 @@ class CustomController extends Controller
 
         $select = date("F", mktime(0, 0, 0, $select, 10));
         $id = '';
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select]);
+        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select, 'id' => $id]);
         // return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dates' => $dates , 'users' => $users, 'select' => $select , 'id' => $id]);
     }
 
