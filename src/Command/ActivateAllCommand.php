@@ -52,7 +52,7 @@ class ActivateAllCommand extends Command
                 $router->post("log/send", ["as"=> "send", "uses"=>"CustomController@send"]);
             });'."\n");
             fclose($f);
-            $this->info('Insert route in web.php');
+            $this->info('Insert route in web.ph');
         }
 
         //////////////////////publish config file//////////////////////
