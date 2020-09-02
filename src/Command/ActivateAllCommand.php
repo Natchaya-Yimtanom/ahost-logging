@@ -50,8 +50,7 @@ class ActivateAllCommand extends Command
                 $router->get("log/view", ["as"=> "view", "uses"=>"CustomController@view"]);
                 $router->get("log/view/{id}", ["as"=> "show", "uses"=>"CustomController@show"]);
                 $router->post("log/send", ["as"=> "send", "uses"=>"CustomController@send"]);
-            });'.PHP_EOL."\n");
-            fwrite($f, $lines[$lineCount-1]);
+            });'."\n");
             fclose($f);
             $this->info('Insert route in web.php');
         }
