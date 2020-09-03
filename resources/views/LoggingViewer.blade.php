@@ -21,6 +21,12 @@
             color: 	#696969;
         }
 
+        select{
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 20px;
+        }
+
         .levelCell{ width: 80px; }
         .dateCell{ width: 110px; }
         
@@ -104,10 +110,11 @@
             display: block;
         }
 
-        #select{
-            width: 100%; 
-            height: 30px;
+        #levelButton{
+            width: 100%;
+            padding: 3px;
             margin-bottom: 20px;
+            border: none;
         }
 
     </style>
@@ -123,39 +130,66 @@
                     <a href="{{route('view')}}">Log Viewer</a>
                 </h1>
 
-                    <form method="post" id="selectDropdown" action="{{route('send')}}">
-                        <select id="select"  name="select" onchange="document.getElementById('selectDropdown').submit();">
-                            <option value="">{{$select}}</option>
-                            <option value="01">January</option>
-                            <option value="02">Febuary</option>
-                            <option value="03">March</option>
-                            <option value="04">April</option>
-                            <option value="05">May</option>
-                            <option value="06">June</option>
-                            <option value="07">July</option>
-                            <option value="08">August</option>
-                            <option value="09">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
-                    </form>
+                <h6>Select month</h6>
+                <form method="post" id="selectMonth" action="{{route('send')}}">
+                    <select id="select"  name="select" onchange="document.getElementById('selectMonth').submit();">
+                        <option value="">{{$select}}</option>
+                        <option value="01">January</option>
+                        <option value="02">Febuary</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </form>
 
-                    <h3 id="showMonth" style="text-align: center; margin-bottom: 20px;">{{$select}}</h3>
+                <button onclick="selectLevel()" id="levelButton">Select Level</button>
+                <div id="levelList" style="display: none;">
+                    <ul style="list-style-type:none;">
+                        @if($id == null)
+                        <li><input type="button" value="INFO" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'INFO'])}}'"></li>
+                        <li><input type="button" value="ERROR" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ERROR'])}}'"></li>
+                        <li><input type="button" value="ALERT" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ALERT'])}}'"></li>
+                        <li><input type="button" value="EMERGENCY" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'EMERGENCY'])}}'"></li>
+                        <li><input type="button" value="CRITICAL" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'CRITICAL'])}}'"></li>
+                        <li><input type="button" value="WARNING" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'WARNING'])}}'"></li>
+                        <li><input type="button" value="NOTICE" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'NOTICE'])}}'"></li>
+                        <li><input type="button" value="DEBUG" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'DEBUG'])}}'"></li>
+                        @else
+                        <li><input type="button" value="INFO" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'INFO'])}}'"></li>
+                        <li><input type="button" value="ERROR" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ERROR'])}}'"></li>
+                        <li><input type="button" value="ALERT" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ALERT'])}}'"></li>
+                        <li><input type="button" value="EMERGENCY" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'EMERGENCY'])}}'"></li>
+                        <li><input type="button" value="CRITICAL" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'CRITICAL'])}}'"></li>
+                        <li><input type="button" value="WARNING" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'WARNING'])}}'"></li>
+                        <li><input type="button" value="NOTICE" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'NOTICE'])}}'"></li>
+                        <li><input type="button" value="DEBUG" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'DEBUG'])}}'"></li>
+                        @endif
+                    </ul>
+                </div>
 
-                    @if($dates->isEmpty())
-                    <p style="text-align: center;">There is no log in {{$select}}</p>
-                    @else
-                        @foreach ($dates as $date)
-                            @if($date->date == $id)
-                                <input type="button" value="{{ $date->date }}" class="list-group-item selectDate activeDate "
-                                    onclick="window.location.href='{{route('show', ['id' => $date->date])}}'">
-                            @else
-                                <input type="button" value="{{ $date->date }}" class="list-group-item selectDate"
-                                    onclick="window.location.href='{{route('show', ['id' => $date->date])}}'">
-                            @endif
-                        @endforeach
-                    @endif
+                <h3 id="showMonth" style="text-align: center; margin-bottom: 20px;">{{$select}}</h3>
+
+                @if($dates->isEmpty())
+                <p style="text-align: center;">There is no log in {{$select}}</p>
+                @else
+                    @foreach ($dates as $date)
+                        @if($date->date == $id)
+                            <input type="button" value="{{ $date->date }}" class="list-group-item selectDate activeDate "
+                                onclick="window.location.href='{{route('show', ['id' => $date->date])}}'">
+                        @else
+                            <input type="button" value="{{ $date->date }}" class="list-group-item selectDate"
+                                onclick="window.location.href='{{route('show', ['id' => $date->date])}}'">
+                        @endif
+                    @endforeach
+                @endif
+
             </div>
 
             <div class="col-10 sidebar mb-3">
@@ -203,3 +237,14 @@
     </div>
 </body>
 </html>
+
+<script>
+function selectLevel() {
+  var x = document.getElementById("levelList");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
