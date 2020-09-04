@@ -111,11 +111,44 @@
         }
 
         #levelButton{
-            width: 100%;
-            padding: 3px;
-            margin-bottom: 20px;
+            padding: 10px;
             border: none;
         }
+
+        .dropbtn {
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #levelList{
+            float:right; 
+            width: 100%;
+            margin: 15px 15px 0px 0px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content input {
+            color: black;
+            padding: 8px;
+            width: 133px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+        
+        .dropdown-content input:hover {background-color: #f1f1f1}
+        .dropdown:hover .dropdown-content {display: block;}
+        .dropdown:hover .dropbtn {background-color: #DCDCDC;}
 
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -126,7 +159,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col sidebar rowColor">
-                <h1 style="margin-bottom: 20px; margin-top: 10px; text-align: center;">
+                <h1 style="margin-bottom: 30px; margin-top: 10px; text-align: center;">
                     <a href="{{route('view')}}">Log Viewer</a>
                 </h1>
 
@@ -149,32 +182,7 @@
                     </select>
                 </form>
 
-                <button onclick="selectLevel()" id="levelButton">Select Level</button>
-                <div id="levelList" style="display: none;">
-                    <ul style="list-style-type:none;">
-                        @if($id == null)
-                        <li><input type="button" value="INFO" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'INFO'])}}'"></li>
-                        <li><input type="button" value="ERROR" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ERROR'])}}'"></li>
-                        <li><input type="button" value="ALERT" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ALERT'])}}'"></li>
-                        <li><input type="button" value="EMERGENCY" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'EMERGENCY'])}}'"></li>
-                        <li><input type="button" value="CRITICAL" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'CRITICAL'])}}'"></li>
-                        <li><input type="button" value="WARNING" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'WARNING'])}}'"></li>
-                        <li><input type="button" value="NOTICE" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'NOTICE'])}}'"></li>
-                        <li><input type="button" value="DEBUG" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'DEBUG'])}}'"></li>
-                        @else
-                        <li><input type="button" value="INFO" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'INFO'])}}'"></li>
-                        <li><input type="button" value="ERROR" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ERROR'])}}'"></li>
-                        <li><input type="button" value="ALERT" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ALERT'])}}'"></li>
-                        <li><input type="button" value="EMERGENCY" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'EMERGENCY'])}}'"></li>
-                        <li><input type="button" value="CRITICAL" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'CRITICAL'])}}'"></li>
-                        <li><input type="button" value="WARNING" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'WARNING'])}}'"></li>
-                        <li><input type="button" value="NOTICE" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'NOTICE'])}}'"></li>
-                        <li><input type="button" value="DEBUG" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'DEBUG'])}}'"></li>
-                        @endif
-                    </ul>
-                </div>
-
-                <h3 id="showMonth" style="text-align: center; margin-bottom: 20px;">{{$select}}</h3>
+                <h3 id="showMonth" style="text-align: center; margin: 20px 0px 20px 0px;">{{$select}}</h3>
 
                 @if($dates->isEmpty())
                 <p style="text-align: center;">There is no log in {{$select}}</p>
@@ -194,8 +202,35 @@
 
             <div class="col-10 sidebar mb-3">
                 @if($id != null)
-                    <h3 style="margin: 20px 0px 20px 0px;">Log data in : {{$id}}</h3>
+                    <h3 style="margin: 20px 0px 20px 0px; display:inline-block;">Log data in : {{$id}}</h3>
+                @else
+                    <h3 style="margin: 20px 0px 20px 0px; display:inline-block;">Log data in : {{$select}}</h3>
                 @endif
+                    <div class="dropdown" id="levelList" style="width:auto">
+                        <button class="dropbtn" id="levelButton">Select Log Level</button>
+                        <div class="dropdown-content" style="left:0">
+                            @if($id == null)
+                            <input value="INFO" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'INFO'])}}'">
+                            <input value="ERROR" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ERROR'])}}'">
+                            <input value="ALERT" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ALERT'])}}'">
+                            <input value="EMERGENCY" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'EMERGENCY'])}}'">
+                            <input value="CRITICAL" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'CRITICAL'])}}'">
+                            <input value="WARNING" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'WARNING'])}}'">
+                            <input value="NOTICE" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'NOTICE'])}}'">
+                            <input value="DEBUG" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'DEBUG'])}}'">
+                            @else
+                            <input value="INFO" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'INFO'])}}'">
+                            <input value="ERROR" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ERROR'])}}'">
+                            <input value="ALERT" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ALERT'])}}'">
+                            <input value="EMERGENCY" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'EMERGENCY'])}}'">
+                            <input value="CRITICAL" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'CRITICAL'])}}'">
+                            <input value="WARNING" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'WARNING'])}}'">
+                            <input value="NOTICE" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'NOTICE'])}}'">
+                            <input value="DEBUG" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'DEBUG'])}}'">
+                            @endif
+                        </div>
+                    </div>
+                    
                 <table class="table table-striped">
                     <thead>
                         <tr>
