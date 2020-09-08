@@ -4,12 +4,12 @@ Save log file and store log data in database , along with Log Viewer view which 
 # Installation
 - Use the composer require to install package
 ```
-composer require quinn/logging
+composer require ahost/logging
 ```
 
 - Add Service Provider to `bootstrap/app.php` in `providers` section
 ```
-$app->register(Quinn\Logging\LoggingServiceProvider::class);
+$app->register(Ahost\Logging\LoggingServiceProvider::class);
 ```
 
 - Uncomment `withFacades()` and `withEloquent()` in `bootstrap/app.php`
@@ -23,7 +23,7 @@ php artisan logging:activate
 ```
 
 # Usage
-- Add `use Quinn\Logging\BaseLogger;` in controller
+- Add `use Ahost\Logging\BaseLogger;` in controller
 - Create variable which inherit BaseLogger function, for example:
 ```
 protected $baselogger;
