@@ -24,6 +24,7 @@ class CustomController extends Controller
 
     public function __construct(BaseLogger $baseLogger)
     {
+        date_default_timezone_set("Asia/Bangkok");
         $this->baseLogger = $baseLogger;
         $this->baseLogger->init();
     }

@@ -206,32 +206,32 @@
                 @else
                     <h3 style="margin: 20px 0px 20px 0px; display:inline-block;">Log data in : {{$month}}</h3>
                 @endif
-                    <div class="dropdown" id="levelList" style="width:auto">
-                        <button class="dropbtn" id="levelButton">Select Log Level</button>
-                        <div class="dropdown-content" style="left:0">
-                            @if($date == null)
-                            <input value="All Level" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'all'])}}'">
-                            <input value="INFO" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'INFO'])}}'">
-                            <input value="ERROR" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'ERROR'])}}'">
-                            <input value="ALERT" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'ALERT'])}}'">
-                            <input value="EMERGENCY" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'EMERGENCY'])}}'">
-                            <input value="CRITICAL" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'CRITICAL'])}}'">
-                            <input value="WARNING" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'WARNING'])}}'">
-                            <input value="NOTICE" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'NOTICE'])}}'">
-                            <input value="DEBUG" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'DEBUG'])}}'">
-                            @else
-                            <input value="All Level" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'all'])}}'">
-                            <input value="INFO" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'INFO'])}}'">
-                            <input value="ERROR" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'ERROR'])}}'">
-                            <input value="ALERT" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'ALERT'])}}'">
-                            <input value="EMERGENCY" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'EMERGENCY'])}}'">
-                            <input value="CRITICAL" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'CRITICAL'])}}'">
-                            <input value="WARNING" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'WARNING'])}}'">
-                            <input value="NOTICE" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'NOTICE'])}}'">
-                            <input value="DEBUG" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'DEBUG'])}}'">
-                            @endif
-                        </div>
+                <div class="dropdown" id="levelList" style="width:auto">
+                    <button class="dropbtn" id="levelButton">Select Log Level</button>
+                    <div class="dropdown-content" style="left:0">
+                        @if($date == null)
+                        <input value="All Level" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'all'])}}'">
+                        <input value="INFO" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'INFO'])}}'">
+                        <input value="ERROR" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'ERROR'])}}'">
+                        <input value="ALERT" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'ALERT'])}}'">
+                        <input value="EMERGENCY" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'EMERGENCY'])}}'">
+                        <input value="CRITICAL" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'CRITICAL'])}}'">
+                        <input value="WARNING" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'WARNING'])}}'">
+                        <input value="NOTICE" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'NOTICE'])}}'">
+                        <input value="DEBUG" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'DEBUG'])}}'">
+                        @else
+                        <input value="All Level" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'all'])}}'">
+                        <input value="INFO" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'INFO'])}}'">
+                        <input value="ERROR" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'ERROR'])}}'">
+                        <input value="ALERT" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'ALERT'])}}'">
+                        <input value="EMERGENCY" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'EMERGENCY'])}}'">
+                        <input value="CRITICAL" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'CRITICAL'])}}'">
+                        <input value="WARNING" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'WARNING'])}}'">
+                        <input value="NOTICE" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'NOTICE'])}}'">
+                        <input value="DEBUG" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'DEBUG'])}}'">
+                        @endif
                     </div>
+                </div>
                     
                 <table class="table table-striped">
                     <thead>
@@ -245,7 +245,7 @@
                     <tbody>
                     @if($tables->isEmpty())
                     <tr>
-                        <td colspan="4" style="text-align: center">No log data available in this month</td>
+                        <td colspan="4" style="text-align: center">No log data available</td>
                     </tr>
                     @else
                         @foreach ($tables as $table)
