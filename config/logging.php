@@ -11,8 +11,8 @@ return [
 
             'logging' => [
                 'driver' => 'custom',
-                'handler' => Quinn\Logging\LoggingHandler::class,
-                'via' => Quinn\Logging\BaseLogger::class,
+                'handler' => Ahost\Logging\LoggingHandler::class,
+                'via' => Ahost\Logging\BaseLogger::class,
                 'level' => 'debug',
             ],
         ],

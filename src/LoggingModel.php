@@ -1,5 +1,5 @@
 <?php
-namespace Quinn\Logging;
+namespace Ahost\Logging;
 
 use Illuminate\Database\Eloquent\Model;
 

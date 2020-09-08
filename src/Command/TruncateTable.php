@@ -1,10 +1,10 @@
 <?php
 
-namespace Quinn\Logging;
+namespace Ahost\Logging;
 
 use Illuminate\Console\Command;
 
-use Quinn\Logging\Logging;
+use Ahost\Logging\Logging;
 
 class TruncateTable extends Command
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Quinn\Logging;
+namespace Ahost\Logging;
 
 use DB;
 use Illuminate\Support\Facades\Auth;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Quinn\Logging;
+namespace Ahost\Logging;
 
 use Illuminate\Support\ServiceProvider;
 
-use Quinn\Logging\ActivateAllCommand;
-use Quinn\Logging\TruncateTable;
+use Ahost\Logging\ActivateAllCommand;
+use Ahost\Logging\TruncateTable;
 
 class LoggingServiceProvider extends ServiceProvider
 {

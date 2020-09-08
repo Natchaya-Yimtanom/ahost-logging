@@ -1,6 +1,6 @@
 <?php
 
-namespace Quinn\Logging\Helpers;
+namespace Ahost\Logging\Helpers;
 
 use Illuminate\Console\Command;
 

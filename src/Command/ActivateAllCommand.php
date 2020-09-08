@@ -1,10 +1,10 @@
 <?php
 
-namespace Quinn\Logging;
+namespace Ahost\Logging;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
-use Quinn\Logging\Helpers\Publisher;
+use Ahost\Logging\Helpers\Publisher;
 
 class ActivateAllCommand extends Command
 {
@@ -30,7 +30,7 @@ class ActivateAllCommand extends Command
     public function handle()
     {
         //////////////////////insert route//////////////////////
-        if( strpos(file_get_contents("routes/web.php"),'$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {') !== false) {
+        if( strpos(file_get_contents("routes/web.php"),'$router->group(["namespace" => "\Ahost\Logging"], function() use ($router) {') !== false) {
         }else{
             //insert route in web.php
             $file = "routes/web.php";
@@ -45,12 +45,12 @@ class ActivateAllCommand extends Command
             for ($i = 0; $i < $lineCount; $i++) {
                 fwrite($f, $lines[$i]);
             }
-            fwrite($f,"\n".'$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {
-                $router->get("log", "CustomController@test");
-                $router->get("log/view", ["as"=> "view", "uses"=>"CustomController@view"]);
-                $router->get("log/view/{date}", ["as"=> "show", "uses"=>"CustomController@show"]);
-                $router->post("log/send", ["as"=> "send", "uses"=>"CustomController@send"]);
-                $router->get("log/level/{month}/{level}", ["as"=> "level", "uses"=>"CustomController@level"]);
+            fwrite($f,"\n".'$router->group(["namespace" => "\Ahost\Logging"], function() use ($router) {
+                $router->get("log", "LoggingController@test");
+                $router->get("log/view", ["as"=> "view", "uses"=>"LoggingController@view"]);
+                $router->get("log/view/{date}", ["as"=> "show", "uses"=>"LoggingController@show"]);
+                $router->post("log/send", ["as"=> "send", "uses"=>"LoggingController@send"]);
+                $router->get("log/level/{month}/{level}", ["as"=> "level", "uses"=>"LoggingController@level"]);
             });'."\n");
             fclose($f);
             $this->info('Insert route in web.php');
@@ -82,8 +82,8 @@ class ActivateAllCommand extends Command
 
         $insert = '"logging" => [
             "driver" => "custom",
-            "handler" => Quinn\Logging\LoggingHandler::class,
-            "via" => Quinn\Logging\BaseLogger::class,
+            "handler" => Ahost\Logging\LoggingHandler::class,
+            "via" => Ahost\Logging\BaseLogger::class,
             "level" => "debug",
         ],';
 

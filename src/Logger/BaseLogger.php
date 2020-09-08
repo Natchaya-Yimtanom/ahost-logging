@@ -1,6 +1,6 @@
 <?php
 
-namespace Quinn\Logging;
+namespace Ahost\Logging;
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\LineFormatter;

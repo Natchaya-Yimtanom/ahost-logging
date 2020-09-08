@@ -1,5 +1,5 @@
 {
-    "name": "quinn/logging",
+    "name": "ahost/logging",
     "description": "Create & save log file and store data in database",
     "type": "library",
     "license": "MIT",
@@ -14,13 +14,13 @@
             "src"
         ],
         "psr-4": {
-            "Quinn\\Logging\\": "src/"
+            "Ahost\\Logging\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Quinn\\Logging\\LoggingServiceProvider"
+                "Ahost\\Logging\\LoggingServiceProvider"
             ]
         }
     },

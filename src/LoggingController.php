@@ -1,47 +1,22 @@
 <?php
 
-namespace Quinn\Logging;
+namespace Ahost\Logging;
 
 use App\Http\Controllers\Controller;
-use Quinn\Logging\BaseLogger;
-use Quinn\Logging\Logging;
+use Ahost\Logging\Logging;
 use Illuminate\Http\Request;
-use Exception;
 
 class CustomController extends Controller
 {
     /**
      * @var BaseLogger
      */
-    private $baseLogger;
-    private $users;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-
-    public function __construct(BaseLogger $baseLogger)
-    {
-        $this->baseLogger = $baseLogger;
-        $this->baseLogger->init();
-    }
-
-    public function test()
-    {
-        try{
-            //success
-            $this->baseLogger->info('INFO: Action log info tests');
-            // $this->baseLogger->debug('DEBUG: Action log debug tests');
-
-            //error
-            // Logging::channel('sample')->error($message);
-        } 
-        catch (Exception $e) {
-            $this->baseLogger->error($e);
-        }
-    }
 
     //show all log data in log viewer
     public function view()
