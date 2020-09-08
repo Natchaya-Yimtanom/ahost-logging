@@ -165,8 +165,8 @@
 
                 <h6>Select month</h6>
                 <form method="post" id="selectMonth" action="{{route('send')}}">
-                    <select id="select"  name="select" onchange="document.getElementById('selectMonth').submit();">
-                        <option value="">{{$select}}</option>
+                    <select id="month"  name="month" onchange="document.getElementById('selectMonth').submit();">
+                        <option value="">{{$month}}</option>
                         <option value="01">January</option>
                         <option value="02">Febuary</option>
                         <option value="03">March</option>
@@ -182,18 +182,18 @@
                     </select>
                 </form>
 
-                <h3 id="showMonth" style="text-align: center; margin: 10px 0px 20px 0px;">{{$select}}</h3>
+                <h3 id="showMonth" style="text-align: center; margin: 10px 0px 20px 0px;">{{$month}}</h3>
 
-                @if($dates->isEmpty())
-                <p style="text-align: center;">There is no log in {{$select}}</p>
+                @if($dateLists->isEmpty())
+                <p style="text-align: center;">There is no log in {{$month}}</p>
                 @else
-                    @foreach ($dates as $date)
-                        @if($date->date == $id)
-                            <input type="button" value="{{ $date->date }}" class="list-group-item selectDate activeDate "
-                                onclick="window.location.href='{{route('show', ['id' => $date->date])}}'">
+                    @foreach ($dateLists as $dateList)
+                        @if($dateList->date == $date)
+                            <input type="button" value="{{ $dateList->date }}" class="list-group-item selectDate activeDate "
+                                onclick="window.location.href='{{route('show', ['date' => $dateList->date])}}'">
                         @else
-                            <input type="button" value="{{ $date->date }}" class="list-group-item selectDate"
-                                onclick="window.location.href='{{route('show', ['id' => $date->date])}}'">
+                            <input type="button" value="{{ $dateList->date }}" class="list-group-item selectDate"
+                                onclick="window.location.href='{{route('show', ['date' => $dateList->date])}}'">
                         @endif
                     @endforeach
                 @endif
@@ -201,34 +201,34 @@
             </div>
 
             <div class="col-10 sidebar mb-3">
-                @if($id != null)
-                    <h3 style="margin: 20px 0px 20px 0px; display:inline-block;">Log data in : {{$id}}</h3>
+                @if($date != null)
+                    <h3 style="margin: 20px 0px 20px 0px; display:inline-block;">Log data in : {{$date}}</h3>
                 @else
-                    <h3 style="margin: 20px 0px 20px 0px; display:inline-block;">Log data in : {{$select}}</h3>
+                    <h3 style="margin: 20px 0px 20px 0px; display:inline-block;">Log data in : {{$month}}</h3>
                 @endif
                     <div class="dropdown" id="levelList" style="width:auto">
                         <button class="dropbtn" id="levelButton">Select Log Level</button>
                         <div class="dropdown-content" style="left:0">
-                            @if($id == null)
-                            <input value="All Level" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'all'])}}'">
-                            <input value="INFO" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'INFO'])}}'">
-                            <input value="ERROR" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ERROR'])}}'">
-                            <input value="ALERT" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ALERT'])}}'">
-                            <input value="EMERGENCY" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'EMERGENCY'])}}'">
-                            <input value="CRITICAL" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'CRITICAL'])}}'">
-                            <input value="WARNING" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'WARNING'])}}'">
-                            <input value="NOTICE" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'NOTICE'])}}'">
-                            <input value="DEBUG" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'DEBUG'])}}'">
+                            @if($date == null)
+                            <input value="All Level" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'all'])}}'">
+                            <input value="INFO" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'INFO'])}}'">
+                            <input value="ERROR" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'ERROR'])}}'">
+                            <input value="ALERT" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'ALERT'])}}'">
+                            <input value="EMERGENCY" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'EMERGENCY'])}}'">
+                            <input value="CRITICAL" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'CRITICAL'])}}'">
+                            <input value="WARNING" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'WARNING'])}}'">
+                            <input value="NOTICE" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'NOTICE'])}}'">
+                            <input value="DEBUG" onclick="window.location.href='{{route('level',['month' => $month,'level' => 'DEBUG'])}}'">
                             @else
-                            <input value="All Level" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'all'])}}'">
-                            <input value="INFO" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'INFO'])}}'">
-                            <input value="ERROR" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ERROR'])}}'">
-                            <input value="ALERT" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ALERT'])}}'">
-                            <input value="EMERGENCY" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'EMERGENCY'])}}'">
-                            <input value="CRITICAL" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'CRITICAL'])}}'">
-                            <input value="WARNING" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'WARNING'])}}'">
-                            <input value="NOTICE" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'NOTICE'])}}'">
-                            <input value="DEBUG" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'DEBUG'])}}'">
+                            <input value="All Level" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'all'])}}'">
+                            <input value="INFO" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'INFO'])}}'">
+                            <input value="ERROR" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'ERROR'])}}'">
+                            <input value="ALERT" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'ALERT'])}}'">
+                            <input value="EMERGENCY" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'EMERGENCY'])}}'">
+                            <input value="CRITICAL" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'CRITICAL'])}}'">
+                            <input value="WARNING" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'WARNING'])}}'">
+                            <input value="NOTICE" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'NOTICE'])}}'">
+                            <input value="DEBUG" onclick="window.location.href='{{route('level',['month' => $date,'level' => 'DEBUG'])}}'">
                             @endif
                         </div>
                     </div>
@@ -243,26 +243,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @if($users->isEmpty())
+                    @if($tables->isEmpty())
                     <tr>
                         <td colspan="4" style="text-align: center">No log data available in this month</td>
                     </tr>
                     @else
-                        @foreach ($users as $user)
+                        @foreach ($tables as $table)
                         <tr>
-                            <td data-status="{{$user->level_name}}" class="status">{{ $user->level_name }}</td>
-                            <td style="text-align: center">{{ $user->user }}</td>
-                            <td>{{ $user->date }} {{ $user->time }}</td>
+                            <td data-status="{{$table->level_name}}" class="status">{{ $table->level_name }}</td>
+                            <td style="text-align: center">{{ $table->user }}</td>
+                            <td>{{ $table->date }} {{ $table->time }}</td>
                             
-                            @if($user->stack != null)
-                            <td id="message">{{ $user->message }} 
+                            @if($table->stack != null)
+                            <td id="message">{{ $table->message }} 
                                 <button id="see" class="seeAll">See All</button>
                                 <div id="stack">
-                                    {{ $user->stack }}
+                                    {{ $table->stack }}
                                 </div>
                             </td>
                             @else
-                            <td>{{ $user->message }} </td>
+                            <td>{{ $table->message }} </td>
                             @endif
                         </tr>
                         @endforeach

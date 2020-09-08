@@ -52,120 +52,120 @@ class CustomController extends Controller
     //show all data in log viewer
     public function view()
     {
-        $select = date('F');
-        $selectM = date('m');
+        $month = date('F');
+        $monthM = date('m');
 
-        $users = Logging::where('date', 'like','%-'.$selectM.'-%')
+        $tables = Logging::where('date', 'like','%-'.$monthM.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
 
-        $dates = Logging::distinct()
+        $dateLists = Logging::distinct()
                         ->select('date')
-                        ->where('date', 'like','%-'.$selectM.'-%')
+                        ->where('date', 'like','%-'.$monthM.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
 
-        $id = '';
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select, 'id' => $id]);
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users , 'select' => $select, 'id' => $id]);
+        $date = '';
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dateLists' => $dateLists , 'tables' => $tables , 'month' => $month, 'date' => $date]);
     }
 
     //show selected date data in log viewer
-    public function show($id)
+    public function show($date)
     {
-        if (strpos($id, "-")) { 
-            $startCharCount = strpos($id, "-") + strlen("-");
-            $firstSubStr = substr($id, $startCharCount, strlen($id));
+        if (strpos($date, "-")) { 
+            $startCharCount = strpos($date, "-") + strlen("-");
+            $firstSubStr = substr($date, $startCharCount, strlen($date));
             $endCharCount = strpos($firstSubStr, "-");
             if ($endCharCount == 0) {
                 $endCharCount = strlen($firstSubStr);
             }
-            $select = substr($firstSubStr, 0, $endCharCount);
+            $month = substr($firstSubStr, 0, $endCharCount);
         }
 
-        $users = Logging::where('date', 'like', $id)
+        $tables = Logging::where('date', 'like', $date)
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
 
-        $dates = Logging::distinct()
+        $dateLists = Logging::distinct()
                         ->select('date')
-                        ->where('date', 'like','%-'.$select.'-%')
+                        ->where('date', 'like','%-'.$month.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
                 
-        $select = date("F", mktime(0, 0, 0, $select, 10));
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select, 'id' => $id]);
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select , 'id' => $id]);
+        $month = date("F", mktime(0, 0, 0, $month, 10));
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
     }
 
     //show selected month data in log viewer
     public function send( Request $request)
     {
-        $select = $request->select;
+        $month = $request->month;
         $level = $request->level;
        
-        $users = Logging::where('date', 'like','%-'.$select.'-%')
+        $tables = Logging::where('date', 'like','%-'.$month.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
         
 
-        $dates = Logging::distinct()
+        $dateLists = Logging::distinct()
                         ->select('date')
-                        ->where('date', 'like','%-'.$select.'-%')
+                        ->where('date', 'like','%-'.$month.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
 
-        $select = date("F", mktime(0, 0, 0, $select, 10));
-        $id = '';
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select, 'id' => $id]);
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dates' => $dates , 'users' => $users, 'select' => $select, 'id' => $id]);
+        $month = date("F", mktime(0, 0, 0, $month, 10));
+        $date = '';
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month, 'date' => $date]);
     }
 
     //show selected level data in log viewer
-    public function level( $select,$level)
+    public function level( $month,$level)
     {
-        $selectM = date("m", strtotime($select));
+        $monthM = date("m", strtotime($month));
 
-        if($select[0] != "2"){
+        if($month[0] != "2"){
             if($level != 'all'){
-                $users = Logging::where('level_name', 'like', $level)
-                        ->where('date', 'like','%-'.$selectM.'-%')
+                $tables = Logging::where('level_name', 'like', $level)
+                        ->where('date', 'like','%-'.$monthM.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
             } else{
-                $users = Logging::where('date', 'like','%-'.$selectM.'-%')
+                $tables = Logging::where('date', 'like','%-'.$monthM.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
             }
-            $id = '';
+            $date = '';
         } else{
-            $users = Logging::where('level_name', 'like', $level)
-                        ->where('date', 'like', $select)
+            $tables = Logging::where('level_name', 'like', $level)
+                        ->where('date', 'like', $month)
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
-            $id = $select;
+            $date = $month;
         }
 
-        $dates = Logging::distinct()
+        $dateLists = Logging::distinct()
                         ->select('date')
-                        ->where('date', 'like','%-'.$selectM.'-%')
+                        ->where('date', 'like','%-'.$monthM.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
 
-        $select = date("F", mktime(0, 0, 0, $selectM, 10));
+        $month = date("F", mktime(0, 0, 0, $monthM, 10));
 
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php',['dates' => $dates , 'users' => $users, 'select' => $select, 'id' => $id]);
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dates' => $dates , 'users' => $users, 'select' => $select , 'id' => $id]);
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
     }
 
 }

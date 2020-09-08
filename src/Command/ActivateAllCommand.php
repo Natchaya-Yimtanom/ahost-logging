@@ -48,9 +48,9 @@ class ActivateAllCommand extends Command
             fwrite($f,"\n".'$router->group(["namespace" => "\Quinn\Logging"], function() use ($router) {
                 $router->get("log", "CustomController@test");
                 $router->get("log/view", ["as"=> "view", "uses"=>"CustomController@view"]);
-                $router->get("log/view/{id}", ["as"=> "show", "uses"=>"CustomController@show"]);
+                $router->get("log/view/{date}", ["as"=> "show", "uses"=>"CustomController@show"]);
                 $router->post("log/send", ["as"=> "send", "uses"=>"CustomController@send"]);
-                $router->get("log/level/{select}/{level}", ["as"=> "level", "uses"=>"CustomController@level"]);
+                $router->get("log/level/{month}/{level}", ["as"=> "level", "uses"=>"CustomController@level"]);
             });'."\n");
             fclose($f);
             $this->info('Insert route in web.php');
@@ -58,7 +58,7 @@ class ActivateAllCommand extends Command
 
         //////////////////////set timezone//////////////////////
 
-        if( strpos(file_get_contents("routes/web.php"),'date_default_timezone_set("Asia/Bangkok");') !== false) {
+        if( strpos(file_get_contents("routes/web.php"),'date_default_timezone_set') !== false) {
         }else{
             //set timezone in web.php
             $path_to_file = 'routes/web.php';
