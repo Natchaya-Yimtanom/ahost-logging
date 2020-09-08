@@ -32,7 +32,7 @@ class CustomController extends Controller
     {
         try{
             //success
-            // $this->baseLogger->info('INFO: Action log info tests');
+            $this->baseLogger->info('INFO: Action log info tests');
             // $this->baseLogger->debug('DEBUG: Action log debug tests');
             // $this->baseLogger->error('ERROR: Action log error tests');
             // $this->baseLogger->emergency('EMERGENCY: Action log emergency tests');
@@ -42,7 +42,7 @@ class CustomController extends Controller
             // $this->baseLogger->critical('CRITICAL: Action log critical tests');
 
             //error
-            Logging::channel('sample')->error($message);
+            // Logging::channel('sample')->error($message);
         } 
         catch (Exception $e) {
             $this->baseLogger->error($e);
@@ -133,11 +133,18 @@ class CustomController extends Controller
         $selectM = date("m", strtotime($select));
 
         if($select[0] != "2"){
-            $users = Logging::where('level_name', 'like', $level)
+            if($level != 'all'){
+                $users = Logging::where('level_name', 'like', $level)
                         ->where('date', 'like','%-'.$selectM.'-%')
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
+            } else{
+                $users = Logging::where('date', 'like','%-'.$selectM.'-%')
+                        ->orderBy('date', 'desc')
+                        ->orderBy('time', 'desc')
+                        ->get();
+            }
             $id = '';
         } else{
             $users = Logging::where('level_name', 'like', $level)

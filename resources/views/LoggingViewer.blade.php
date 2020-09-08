@@ -182,7 +182,7 @@
                     </select>
                 </form>
 
-                <h3 id="showMonth" style="text-align: center; margin: 20px 0px 20px 0px;">{{$select}}</h3>
+                <h3 id="showMonth" style="text-align: center; margin: 10px 0px 20px 0px;">{{$select}}</h3>
 
                 @if($dates->isEmpty())
                 <p style="text-align: center;">There is no log in {{$select}}</p>
@@ -210,6 +210,7 @@
                         <button class="dropbtn" id="levelButton">Select Log Level</button>
                         <div class="dropdown-content" style="left:0">
                             @if($id == null)
+                            <input value="All Level" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'all'])}}'">
                             <input value="INFO" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'INFO'])}}'">
                             <input value="ERROR" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ERROR'])}}'">
                             <input value="ALERT" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'ALERT'])}}'">
@@ -219,6 +220,7 @@
                             <input value="NOTICE" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'NOTICE'])}}'">
                             <input value="DEBUG" onclick="window.location.href='{{route('level',['select' => $select,'level' => 'DEBUG'])}}'">
                             @else
+                            <input value="All Level" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'all'])}}'">
                             <input value="INFO" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'INFO'])}}'">
                             <input value="ERROR" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ERROR'])}}'">
                             <input value="ALERT" onclick="window.location.href='{{route('level',['select' => $id,'level' => 'ALERT'])}}'">
@@ -272,14 +274,3 @@
     </div>
 </body>
 </html>
-
-<script>
-function selectLevel() {
-  var x = document.getElementById("levelList");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-</script>

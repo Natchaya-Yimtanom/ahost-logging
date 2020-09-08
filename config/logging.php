@@ -15,9 +15,5 @@ return [
                 'via' => Quinn\Logging\BaseLogger::class,
                 'level' => 'debug',
             ],
-
-            'emergency' => [
-                        'path' => storage_path('logs/laravel.log'),
-                    ],
         ],
 ];
