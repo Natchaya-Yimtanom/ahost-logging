@@ -2,22 +2,22 @@
 Save log file and store log data in database , along with Log Viewer view which can access directly through package's route.
 
 # Installation
-Use the composer require to install package
+- Use the composer require to install package
 ```
 composer require quinn/logging
 ```
 
-Add Service Provider to `bootstrap/app.php` in `providers` section
+- Add Service Provider to `bootstrap/app.php` in `providers` section
 ```
 $app->register(Quinn\Logging\LoggingServiceProvider::class);
 ```
 
-Uncomment `withFacades()` and `withEloquent()` in `bootstrap/app.php`
+- Uncomment `withFacades()` and `withEloquent()` in `bootstrap/app.php`
 ```
 $app->withFacades();
 $app->withEloquent();
 ```
-Run package custom command for some auto-configuration
+- Run package custom command for some auto-configuration
 ```
 php artisan logging:activate
 ```
