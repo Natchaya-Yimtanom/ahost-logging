@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Ahost\Logging\Logging;
 use Illuminate\Http\Request;
 
-class CustomController extends Controller
+class LoggingController extends Controller
 {
     /**
      * @var BaseLogger
