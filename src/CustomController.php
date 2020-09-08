@@ -62,8 +62,8 @@ class CustomController extends Controller
                         ->get();
 
         $date = '';
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dateLists' => $dateLists , 'tables' => $tables , 'month' => $month, 'date' => $date]);
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dateLists' => $dateLists , 'tables' => $tables , 'month' => $month, 'date' => $date]);
     }
 
     //show selected date data in log viewer
@@ -92,8 +92,8 @@ class CustomController extends Controller
                         ->get();
                 
         $month = date("F", mktime(0, 0, 0, $month, 10));
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php',['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
     }
 
     //show selected month data in log viewer
@@ -117,8 +117,8 @@ class CustomController extends Controller
 
         $month = date("F", mktime(0, 0, 0, $month, 10));
         $date = '';
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month, 'date' => $date]);
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month, 'date' => $date]);
     }
 
     //show selected level data in log viewer
@@ -166,8 +166,8 @@ class CustomController extends Controller
 
         $month = date("F", mktime(0, 0, 0, $monthM, 10));
 
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
-        // return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        // return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        return view()->file('..\packages\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
     }
 
 }
