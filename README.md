@@ -2,7 +2,7 @@
 Save log file and store log data in database , along with Log Viewer view which can access directly through package's route.
 
 # Installation
-- ใช้คำสั่ง compoer require ใน terminal เพื่อติดตั้ง package
+- ใช้คำสั่ง composer require ใน terminal เพื่อติดตั้ง package
 ```
 composer require ahost/logging
 ```
