@@ -30,6 +30,8 @@ class BaseLogger extends Logger{
     public function init()
     {
         //set log format and store log in file
+        date_default_timezone_set('Asia/Bangkok');
+        
         $dateFormat = "[Y-m-d H:i:s]";
         $output = "%datetime% %channel%.%level_name% : %message% %context% %extra%\n";
         $formatter = new LineFormatter($output,$dateFormat);
