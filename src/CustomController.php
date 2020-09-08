@@ -147,11 +147,19 @@ class CustomController extends Controller
             }
             $date = '';
         } else{
-            $tables = Logging::where('level_name', 'like', $level)
+            if($level != 'all'){
+                $tables = Logging::where('level_name', 'like', $level)
                         ->where('date', 'like', $month)
                         ->orderBy('date', 'desc')
                         ->orderBy('time', 'desc')
                         ->get();
+            } else{
+                $tables = Logging::where('date', 'like','%-'.$monthM.'-%')
+                        ->where('date', 'like', $month)
+                        ->orderBy('date', 'desc')
+                        ->orderBy('time', 'desc')
+                        ->get();
+            }
             $date = $month;
         }
 
