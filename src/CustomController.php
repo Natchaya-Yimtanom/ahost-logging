@@ -62,7 +62,7 @@ class CustomController extends Controller
                         ->get();
 
         $date = '';
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        return view()->file('..\vendor\ahost\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
     }
 
     //show selected date log data in log viewer
@@ -91,7 +91,7 @@ class CustomController extends Controller
                         ->get();
                 
         $month = date("F", mktime(0, 0, 0, $month, 10));
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        return view()->file('..\vendor\ahost\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
     }
 
     //show selected month log data in log viewer
@@ -115,7 +115,7 @@ class CustomController extends Controller
 
         $month = date("F", mktime(0, 0, 0, $month, 10));
         $date = '';
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        return view()->file('..\vendor\ahost\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
     }
 
     //show selected level log data in log viewer
@@ -163,7 +163,7 @@ class CustomController extends Controller
 
         $month = date("F", mktime(0, 0, 0, $monthM, 10));
 
-        return view()->file('..\vendor\quinn\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
+        return view()->file('..\vendor\ahost\logging\resources\views\LoggingViewer.blade.php', ['dateLists' => $dateLists , 'tables' => $tables, 'month' => $month , 'date' => $date]);
     }
 
 }
