@@ -47,12 +47,9 @@ class LoggingHandler extends AbstractProcessingHandler{
            'extra'         => json_encode($record['extra']),
            'remote_addr'   => $_SERVER['REMOTE_ADDR'],
            'user_agent'    => $_SERVER['HTTP_USER_AGENT'],
-           //    'record_datetime' => $record['datetime']->format('Y-m-d H:i:s'),
-           //    'formatted'     => $formatStr,
        );
 
        DB::connection()->table($this->table)->insert($data);
-        // $formatStr = substr($record['formatted'],strpos($record['formatted'], "]") + 2);
     }
 
 }
