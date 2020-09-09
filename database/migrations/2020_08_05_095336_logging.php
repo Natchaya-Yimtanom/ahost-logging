@@ -27,8 +27,6 @@ class Logging extends Migration
             $table->longText('extra');
             $table->string('remote_addr')->nullable();
             $table->string('user_agent')->nullable();
-            // $table->longText('formatted');
-            // $table->string('record_datetime');
         });
     }
 
