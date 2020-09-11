@@ -56,6 +56,17 @@ class ActivateAllCommand extends Command
             $this->info('Insert route in web.php');
         }
 
+        //////////////////////set timezone//////////////////////
+        $path_to_file = 'routes/web.php';
+        $file_contents = file_get_contents($path_to_file);
+        $search = '<?php';
+
+        $insert = 'date_default_timezone_set("Asia/Bangkok");';
+
+        $replace = $search."\n".$insert;
+        $file_contents = str_replace($search , $replace , $file_contents);
+        file_put_contents($path_to_file,$file_contents);
+
         //////////////////////publish config file//////////////////////
 
         //create folder if not already have
