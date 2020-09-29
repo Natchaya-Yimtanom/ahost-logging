@@ -24,7 +24,6 @@ php artisan logging:activate
 
 # Usage
 - เพิ่มคำสั่ง `use Ahost\Logging\BaseLogger;` ในไฟล์ controller ที่ต้องการใช้งานฟังก์ชันของ package
-- Create variable which inherit BaseLogger function, for example:
 - สร้าง variable ที่สืบทอดฟังก์ชันของ class baselogger ในไฟล์ controller ที่ต้องการ ยกตัวอย่างเช่น
 ```
 protected $baselogger;
@@ -33,15 +32,12 @@ protected $baselogger;
         $this->baselogger = $baselogger;
     }
 ```
-- Call function `init()` from BaseLogger inherited variable (Which will set log file's path)
 - เรียกใช้ฟังก์ชัน init() ผ่าน variable ที่สืบทอด class baselogger (เพื่อทำการตั้งค่า path ของ log file)
 ```
 $this->baselogger->init();
 ```
-- Call log function through variable where log message is require, for example:
 - เรียกใช้ฟังก์ชันของ baselogger ผ่าน variable ในส่วนที่ต้องการเก็บข้อความ log ยกตัวอย่างเช่น
 ```
 $this->baselogger->info('Information Log Message');
 ```
-- You can go to `http://.../log/view` for simple Log Viewer
 - สามารถเข้าดูหน้า Log Viewer ได้ผ่าน `http://.../log/view`
